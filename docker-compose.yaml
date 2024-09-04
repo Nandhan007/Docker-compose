@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  api:
+    image: nithyanantham/node-astronics:latest
+    container_name: node-mern
+    ports:
+      - "7001:7001"
+    networks:
+      - bridge-network
+  client:
+    image: nithyanantham/react-astronics:latest
+    container_name: react-mern
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
+    networks:
+      - bridge-network
+networks:
+  bridge-network:
+    driver: bridge
